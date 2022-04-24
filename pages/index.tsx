@@ -2,85 +2,86 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 
-const Home: NextPage = () => {
+export type Buidler = {
+  login: string
+  id: number
+  url: string
+  repo: string
+  contributions: number
+  name: string
+  company: string | null
+  blog: string | null
+  email: string | null
+  bio: string | null
+  twitter_username: string | null
+}
+
+type HomeProps = {
+  buidlers: Buidler[]
+}
+
+const Home: NextPage<HomeProps> = ({ buidlers }) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex min-h-screen flex-col items-center font-mono">
       <Head>
-        <title>Create Next App</title>
+        <title>buidler3</title>
         <link rel="icon" href="/favicon.ico" />
+        {/* <script
+          data-token="VLESW6URT5L5"
+          async
+          src="https://cdn.splitbee.io/sb.js"
+        ></script> */}
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
+      <main className="flex w-full flex-1 items-center sm:w-4/5 lg:w-1/2">
+        <div className="w-full">
+          <div className=" text-center">
+            <p className="bg-gradient-to-tr from-purple-600 to-blue-600 bg-clip-text text-6xl font-bold text-transparent">
+              buidler3
             </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+            <div>
+              {buidlers.map((buidler) => (
+                <p>{JSON.stringify(buidler)}</p>
+              ))}
+            </div>
+          </div>
         </div>
       </main>
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+      <footer className="flex h-16 w-full items-center justify-center border-t">
+        By&nbsp;
+        <a className="text-purple-600" href="https://github.com/0xbe1">
+          @0xbe1
+        </a>
+        &nbsp;
+        <a href="https://github.com/0xbe1/buidler3">
+          <img src="github.svg" alt="GitHub" className="h-6" />
+        </a>
+        &nbsp;|&nbsp;Questions?&nbsp;
+        <a href="https://discord.gg/u5KUjNZ8wy">
+          <img src="discord.svg" alt="Discord" className="h-6" />
+        </a>
+        &nbsp;
+        <a href="https://twitter.com/_0xbe1/status/1511638106554134530">
+          <img src="twitter.svg" alt="Twitter" className="h-6" />
+        </a>
+        &nbsp;
+        <a href="https://www.reddit.com/r/thegraph/comments/txi4c6/announcing_startblock_find_a_contracts_startblock/">
+          <img src="reddit.svg" alt="Reddit" className="h-6" />
         </a>
       </footer>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const res = await fetch('http://localhost:3000/api/hello')
+  const { data: buidlers } = await res.json()
+  return {
+    props: {
+      buidlers,
+    },
+  }
 }
 
 export default Home
