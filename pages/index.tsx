@@ -118,7 +118,7 @@ function User(props: { user: Buidler }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/api/hello')
+  const res = await fetch(`${process.env.VERCEL_URL}/api/hello`)
   const { data: buidlers } = await res.json()
   return {
     props: {
