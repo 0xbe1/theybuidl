@@ -29,6 +29,8 @@ const REPOS = [
   'ChainSafe/web3.js',
   'ethers-io/ethers.js',
   'OpenZeppelin/openzeppelin-contracts',
+  // wallet
+  'MetaMask/metamask-extension',
   // infra
   'graphprotocol/graph-node',
   'streamingfast/substreams',
