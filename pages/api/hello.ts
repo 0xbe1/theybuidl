@@ -5,11 +5,36 @@ import { Buidler } from '..'
 const octokit = new Octokit({ auth: process.env.GITHUB_ACCESS_TOKEN || '' })
 
 const REPOS = [
+  // chains
+  'bitcoin/bitcoin',
   'ethereum/go-ethereum',
   'ethereum/solidity',
   'solana-labs/solana',
+  'terra-money/core',
+  'bnb-chain/bsc',
+  'ava-labs/avalanchego',
+  'maticnetwork/bor',
+  'near/nearcore',
+  // defi
   'smartcontractkit/chainlink',
   'Uniswap/v2-core',
+  'Uniswap/v3-core',
+  'aave/protocol-v2',
+  'aave/aave-v3-core',
+  'curvefi/curve-contract',
+  'OlympusDAO/olympus-contracts',
+  // devtools
+  'NomicFoundation/hardhat',
+  'foundry-rs/foundry',
+  'ChainSafe/web3.js',
+  'ethers-io/ethers.js',
+  'OpenZeppelin/openzeppelin-contracts',
+  // infra
+  'graphprotocol/graph-node',
+  'streamingfast/substreams',
+  'ceramicnetwork/ceramic',
+  'ArweaveTeam/arweave',
+  'ipfs/go-ipfs'
 ]
 
 type Result<T> =
