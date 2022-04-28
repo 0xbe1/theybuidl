@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 
 export type Buidler = {
   login: string
@@ -41,7 +40,7 @@ const Home: NextPage<HomeProps> = ({ buidlers }) => {
             </p>
             <div>
               {buidlers.map((buidler) => (
-                <p>{JSON.stringify(buidler)}</p>
+                <User key={buidler.id} user={buidler} />
               ))}
             </div>
           </div>
@@ -70,6 +69,50 @@ const Home: NextPage<HomeProps> = ({ buidlers }) => {
           <img src="reddit.svg" alt="Reddit" className="h-6" />
         </a>
       </footer>
+    </div>
+  )
+}
+
+function User(props: { user: Buidler }) {
+  return (
+    <div className="flex rounded-lg border border-gray-200 shadow-md">
+      <div className="flex-1 bg-orange-100">
+        <div>
+          <span className="underline">
+            <a href={`https://github.com/${props.user.login}`}>
+              {props.user.login}
+            </a>
+          </span>
+          {props.user.name && <span>({props.user.name})</span>}
+        </div>
+        {/* <div>{props.user.bio}</div>
+        <div>
+          <span>{props.user.company}</span>
+        </div> */}
+        <div>
+          {props.user.twitter_username && (
+            <span className="underline">
+              <a href={`https://twitter.com/${props.user.twitter_username}`}>
+                @{props.user.twitter_username}
+              </a>
+            </span>
+          )}
+          {props.user.email && (
+            <span className="underline">
+              <a href={`mailto:${props.user.email}`}>email</a>
+            </span>
+          )}
+          {props.user.blog && (
+            <span className="underline">
+              <a href={props.user.blog}>blog</a>
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="flex-1 bg-green-100">
+        {props.user.contributions} contributions to {props.user.repo}
+      </div>
     </div>
   )
 }
