@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { Octokit } from '@octokit/core'
+import { throttling } from '@octokit/plugin-throttling'
 
 type Buidler = {
   login: string
@@ -43,7 +44,38 @@ type User = {
   twitter_username: string | null
 }
 
-const octokit = new Octokit({ auth: process.env.GITHUB_ACCESS_TOKEN || '' })
+const ThrottledOctokit = Octokit.plugin(throttling)
+const throttlingOptions = {
+  auth: process.env.GITHUB_ACCESS_TOKEN || '',
+  throttle: {
+    onRateLimit: (
+      retryAfter: number,
+      options: Record<string, any>,
+      octokit: Octokit
+    ) => {
+      octokit.log.warn(
+        `Request quota exhausted for request ${options.method} ${options.url}`
+      )
+
+      if (options.request.retryCount === 0) {
+        // only retries once
+        octokit.log.info(`Retrying after ${retryAfter} seconds!`)
+        return true
+      }
+    },
+    onSecondaryRateLimit: (
+      retryAfter: number,
+      options: Record<string, any>,
+      octokit: Octokit
+    ) => {
+      // does not retry, only logs a warning
+      octokit.log.warn(
+        `SecondaryRateLimit detected for request ${options.method} ${options.url}`
+      )
+    },
+  },
+}
+const octokit = new ThrottledOctokit(throttlingOptions)
 
 const REPOS = [
   // chains
