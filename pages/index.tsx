@@ -181,13 +181,6 @@ function User(props: { user: Buidler }) {
 }
 
 export async function getStaticProps() {
-  // const res = await fetch(`http://${process.env.VERCEL_URL}:3000/api/hello`)
-  // const { data: buidlers } = await res.json()
-  // return {
-  //   props: {
-  //     buidlers,
-  //   },
-  // }
   const tryUsers = await Promise.all(REPOS.map((repo) => fetch(repo)))
   let users: Buidler[] = []
   for (const tryUser of tryUsers) {
