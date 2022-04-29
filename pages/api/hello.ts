@@ -75,11 +75,10 @@ export default async function handler(
   let users: Buidler[] = []
 
   tryUsers.forEach((tryUser) => {
-    const { data, error } = tryUser
-    if (error) {
-      res.status(200).json({ error: { message: error.message } })
+    if (tryUser.error) {
+      res.status(200).json({ error: { message: tryUser.error.message } })
     } else {
-      users.push(...data)
+      users.push(...tryUser.data)
     }
   })
 
