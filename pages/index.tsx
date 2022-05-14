@@ -13,6 +13,42 @@ const BOT_GITHUB_LOGINS = [
 
 const MIN_CONTRIBUTIONS = 10
 
+const GITHUB_REPOS = [
+  // chains
+  'bitcoin/bitcoin',
+  'ethereum/go-ethereum',
+  'ethereum/solidity',
+  'solana-labs/solana',
+  'terra-money/core',
+  'near/nearcore',
+  'paritytech/substrate',
+  'paritytech/polkadot',
+  'ava-labs/avalanchego',
+  'cosmos/cosmos-sdk',
+  // defi
+  'smartcontractkit/chainlink',
+  'Uniswap/v2-core',
+  'Uniswap/v3-core',
+  'aave/protocol-v2',
+  'aave/aave-v3-core',
+  'curvefi/curve-contract',
+  'OlympusDAO/olympus-contracts',
+  // devtools
+  'NomicFoundation/hardhat',
+  'foundry-rs/foundry',
+  'ChainSafe/web3.js',
+  'ethers-io/ethers.js',
+  'OpenZeppelin/openzeppelin-contracts',
+  // wallet
+  'MetaMask/metamask-extension',
+  // infra
+  'graphprotocol/graph-node',
+  'streamingfast/substreams',
+  'ceramicnetwork/ceramic',
+  'ArweaveTeam/arweave',
+  'ipfs/go-ipfs',
+]
+
 type Buidler = {
   login: string
   id: number
@@ -54,14 +90,14 @@ type Result<T> =
       error: { message: string }
     }
 
-type RepoContributor = {
+type GitHubRepoContributor = {
   login: string
   id: number
   url: string
   contributions: number
 }
 
-type User = {
+type GitHubUser = {
   login: string
   name: string
   company: string | null
@@ -104,42 +140,6 @@ const throttlingOptions = {
 }
 const octokit = new ThrottledOctokit(throttlingOptions)
 
-const REPOS = [
-  // chains
-  'bitcoin/bitcoin',
-  'ethereum/go-ethereum',
-  'ethereum/solidity',
-  'solana-labs/solana',
-  'terra-money/core',
-  'near/nearcore',
-  'paritytech/substrate',
-  'paritytech/polkadot',
-  'ava-labs/avalanchego',
-  'cosmos/cosmos-sdk',
-  // defi
-  'smartcontractkit/chainlink',
-  'Uniswap/v2-core',
-  'Uniswap/v3-core',
-  'aave/protocol-v2',
-  'aave/aave-v3-core',
-  'curvefi/curve-contract',
-  'OlympusDAO/olympus-contracts',
-  // devtools
-  'NomicFoundation/hardhat',
-  'foundry-rs/foundry',
-  'ChainSafe/web3.js',
-  'ethers-io/ethers.js',
-  'OpenZeppelin/openzeppelin-contracts',
-  // wallet
-  'MetaMask/metamask-extension',
-  // infra
-  'graphprotocol/graph-node',
-  'streamingfast/substreams',
-  'ceramicnetwork/ceramic',
-  'ArweaveTeam/arweave',
-  'ipfs/go-ipfs',
-]
-
 const Home: NextPage<{
   buidlers: AggBuidler[]
 }> = ({ buidlers }) => {
@@ -163,7 +163,7 @@ const Home: NextPage<{
             </p>
             <div>
               {buidlers.map((buidler) => (
-                <User key={buidler.id} user={buidler} />
+                <Buidler key={buidler.id} buidler={buidler} />
               ))}
             </div>
           </div>
@@ -196,7 +196,7 @@ const Home: NextPage<{
   )
 }
 
-function User(props: { user: AggBuidler }) {
+function Buidler(props: { buidler: AggBuidler }) {
   return (
     <div className="my-2 flex rounded-lg border border-purple-600">
       <div className="flex-1 p-2">
@@ -205,46 +205,46 @@ function User(props: { user: AggBuidler }) {
             🐙{' '}
             <a
               className="underline"
-              href={`https://github.com/${props.user.login}`}
+              href={`https://github.com/${props.buidler.login}`}
             >
-              {props.user.login}
+              {props.buidler.login}
             </a>
           </span>
-          {props.user.name && <span>&nbsp;{props.user.name}</span>}
+          {props.buidler.name && <span>&nbsp;{props.buidler.name}</span>}
         </div>
         <div>
           {/* TODO: render github link when includes @ */}
-          {props.user.company && <span>💻 {props.user.company}</span>}
+          {props.buidler.company && <span>💻 {props.buidler.company}</span>}
         </div>
         <div>
-          {props.user.twitter_username && (
+          {props.buidler.twitter_username && (
             <span>
               🐦{' '}
               <a
                 className="underline"
-                href={`https://twitter.com/${props.user.twitter_username}`}
+                href={`https://twitter.com/${props.buidler.twitter_username}`}
               >
-                {props.user.twitter_username}
+                {props.buidler.twitter_username}
               </a>
             </span>
           )}
         </div>
         <div>
-          {props.user.email && (
+          {props.buidler.email && (
             <span>
               📮{' '}
-              <a className="underline" href={`mailto:${props.user.email}`}>
-                {props.user.email}
+              <a className="underline" href={`mailto:${props.buidler.email}`}>
+                {props.buidler.email}
               </a>
             </span>
           )}
         </div>
         <div>
-          {props.user.blog && (
+          {props.buidler.blog && (
             <span>
-              🖊️{' '}
-              <a className="underline" href={props.user.blog}>
-                {props.user.blog}
+              📝{' '}
+              <a className="underline" href={props.buidler.blog}>
+                {props.buidler.blog}
               </a>
             </span>
           )}
@@ -253,7 +253,7 @@ function User(props: { user: AggBuidler }) {
 
       <div className="flex-1 p-2">
         {/* TODO: link to contributions */}
-        {props.user.repoContributions.map((work, i) => (
+        {props.buidler.repoContributions.map((work, i) => (
           <div key={i}>
             {work.repo} ({work.contributions})
           </div>
@@ -264,7 +264,7 @@ function User(props: { user: AggBuidler }) {
 }
 
 export async function getStaticProps() {
-  const tryUsers = await Promise.all(REPOS.map((repo) => fetch(repo)))
+  const tryUsers = await Promise.all(GITHUB_REPOS.map((repo) => fetch(repo)))
   let buidlers: Buidler[] = []
   for (const tryUser of tryUsers) {
     if (tryUser.error) {
@@ -303,6 +303,14 @@ export async function getStaticProps() {
     }
     return acc
   }, [])
+
+  // order by contributions
+  aggBuidlers.sort((a, b) => {
+    return (
+      b.repoContributions.reduce((acc, curr) => acc + curr.contributions, 0) -
+      a.repoContributions.reduce((acc, curr) => acc + curr.contributions, 0)
+    )
+  })
 
   return {
     props: {
@@ -363,7 +371,7 @@ async function fetch(repo: string): Promise<Result<Buidler[]>> {
 
 async function fetchRepoContributors(
   repo: string
-): Promise<Result<RepoContributor[]>> {
+): Promise<Result<GitHubRepoContributor[]>> {
   const [owner, repoName] = repo.split('/')
   try {
     const repoContributorsResp = await octokit.request(
@@ -373,7 +381,8 @@ async function fetchRepoContributors(
         repo: repoName,
       }
     )
-    const repoContributors = repoContributorsResp.data as RepoContributor[]
+    const repoContributors =
+      repoContributorsResp.data as GitHubRepoContributor[]
     return { data: repoContributors }
   } catch (error: any) {
     console.log('fetchRepoContributors: ', error)
@@ -381,12 +390,12 @@ async function fetchRepoContributors(
   }
 }
 
-async function fetchUser(username: string): Promise<Result<User>> {
+async function fetchUser(username: string): Promise<Result<GitHubUser>> {
   try {
     const userResp = await octokit.request('GET /users/{username}', {
       username,
     })
-    const user = userResp.data as User
+    const user = userResp.data as GitHubUser
     return { data: { ...user } }
   } catch (error: any) {
     console.log('fetchUser: ', error)
