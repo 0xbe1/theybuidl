@@ -97,33 +97,33 @@ const Home: NextPage<{
   return (
     <div className="flex min-h-screen flex-col items-center font-mono">
       <Head>
-        <title>They Buidl</title>
+        <title>They BUIDL</title>
         <meta
           name="description"
-          content="List of core buidlers behind the most impactful web3 projects."
+          content="List of core BUIDLers behind the most impactful web3 projects."
         />
         <meta property="og:url" content="https://theybuidl.xyz/" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="They Buidl" />
+        <meta property="og:title" content="They BUIDL" />
         <meta
           property="og:description"
-          content="List of core buidlers behind the most impactful web3 projects."
+          content="List of core BUIDLers behind the most impactful web3 projects."
         />
         <meta
           property="og:image"
-          content="https://og-image.vercel.app/**They%20Buidl**.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg"
+          content="https://theybuidl.xyz/og-preview.png"
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="theybuidl.xyz" />
         <meta property="twitter:url" content="https://theybuidl.xyz/" />
-        <meta name="twitter:title" content="They Buidl" />
+        <meta name="twitter:title" content="They BUIDL" />
         <meta
           name="twitter:description"
-          content="List of core buidlers behind the most impactful web3 projects."
+          content="List of core BUIDLers behind the most impactful web3 projects."
         />
         <meta
           name="twitter:image"
-          content="https://og-image.vercel.app/**They%20Buidl**.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg"
+          content="https://theybuidl.xyz/og-preview.png"
         />
         <link rel="icon" href="/favicon.ico" />
         <script
@@ -135,10 +135,10 @@ const Home: NextPage<{
 
       <main className="flex w-full flex-1 items-center sm:w-4/5 lg:w-1/2">
         <div className="w-full">
-          <p className="my-10 text-6xl font-bold text-purple-600">They Buidl</p>
+          <p className="my-10 text-6xl font-bold text-purple-600">They BUIDL</p>
           <div className="my-5">
             <p>
-              List of core buidlers behind{' '}
+              List of core BUIDLers behind{' '}
               <a
                 className="underline"
                 href="https://github.com/0xbe1/theybuild/issues/3"
@@ -149,7 +149,7 @@ const Home: NextPage<{
             </p>
           </div>
           <div className="flex text-purple-500">
-            <div className="w-1/2 px-2">Buidler</div>
+            <div className="w-1/2 px-2">BUIDLer</div>
             <div className="w-1/2 px-2">Contributions</div>
           </div>
           <div>
@@ -184,7 +184,7 @@ const Home: NextPage<{
 
 function Buidler(props: { buidler: AggBuidler }) {
   return (
-    <div className="my-2 flex rounded-lg border border-purple-600">
+    <div className="my-4 flex rounded-lg border border-purple-600">
       <div className="w-1/2 p-2">
         <DataRow
           icon={'🐙'}
