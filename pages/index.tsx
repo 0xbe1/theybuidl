@@ -3,6 +3,14 @@ import Head from 'next/head'
 import { Octokit } from '@octokit/core'
 import { throttling } from '@octokit/plugin-throttling'
 
+const BOT_GITHUB_LOGINS = [
+  'dependabot-preview[bot]',
+  'dependabot[bot]',
+  'renovate[bot]',
+  'metamaskbot',
+  'github-actions[bot]',
+]
+
 type Buidler = {
   login: string
   id: number
@@ -302,10 +310,7 @@ export async function getStaticProps() {
 }
 
 function shouldRender(buidler: Buidler): boolean {
-  if (
-    buidler.login === 'dependabot-preview[bot]' ||
-    buidler.login === 'dependabot[bot]'
-  ) {
+  if (BOT_GITHUB_LOGINS.includes(buidler.login)) {
     return false
   }
   return true
