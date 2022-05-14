@@ -224,7 +224,7 @@ function User(props: { user: AggBuidler }) {
                 className="underline"
                 href={`https://twitter.com/${props.user.twitter_username}`}
               >
-                @{props.user.twitter_username}
+                {props.user.twitter_username}
               </a>
             </span>
           )}
