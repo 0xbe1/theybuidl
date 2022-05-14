@@ -134,12 +134,8 @@ const Home: NextPage<{
           <img src="discord.svg" alt="Discord" className="h-6" />
         </a>
         &nbsp;
-        <a href="https://twitter.com/_0xbe1/status/1511638106554134530">
+        <a href="https://twitter.com/_0xbe1">
           <img src="twitter.svg" alt="Twitter" className="h-6" />
-        </a>
-        &nbsp;
-        <a href="https://www.reddit.com/r/thegraph/comments/txi4c6/announcing_startblock_find_a_contracts_startblock/">
-          <img src="reddit.svg" alt="Reddit" className="h-6" />
         </a>
       </footer>
     </div>
@@ -259,7 +255,7 @@ function LinkifyText({ text }: { text: string }) {
               </a>
             )
           } else {
-            return <span>{word}</span>
+            return <span key={i}>{word}</span>
           }
         })
         .reduce<React.ReactNode>((prev, curr) => [prev, ' ', curr], '')}
