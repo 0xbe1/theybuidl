@@ -131,7 +131,7 @@ const Home: NextPage<{
       <main className="flex w-full flex-1 items-center sm:w-4/5 lg:w-1/2">
         <div className="w-full">
           <div className=" text-center">
-            <p className="bg-gradient-to-tr from-purple-600 to-blue-600 bg-clip-text text-6xl font-bold text-transparent">
+            <p className="text-purple-600 text-6xl font-bold my-10">
               They Buidl
             </p>
             <div>
