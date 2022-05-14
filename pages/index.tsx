@@ -130,8 +130,8 @@ const Home: NextPage<{
 
       <main className="flex w-full flex-1 items-center sm:w-4/5 lg:w-1/2">
         <div className="w-full">
-          <div className=" text-center">
-            <p className="text-purple-600 text-6xl font-bold my-10">
+          <div className="">
+            <p className="my-10 text-6xl font-bold text-purple-600">
               They Buidl
             </p>
             <div>
@@ -171,43 +171,62 @@ const Home: NextPage<{
 
 function User(props: { user: Buidler }) {
   return (
-    <div className="flex rounded-lg border border-gray-200 shadow-md">
-      <div className="flex-1 bg-orange-100">
+    <div className="flex rounded-lg border border-purple-600 my-2">
+      <div className="flex-1 p-2">
         <div>
-          <span className="underline">
-            <a href={`https://github.com/${props.user.login}`}>
+          <span>
+            🐙{' '}
+            <a
+              className="underline"
+              href={`https://github.com/${props.user.login}`}
+            >
               {props.user.login}
             </a>
           </span>
-          {props.user.name && <span>({props.user.name})</span>}
+          {props.user.name && <span>&nbsp;{props.user.name}</span>}
         </div>
-        {/* <div>{props.user.bio}</div>
         <div>
-          <span>{props.user.company}</span>
-        </div> */}
+          {/* TODO: render github link when includes @ */}
+          {props.user.company && <span>💻{' '}{props.user.company}</span>}
+        </div>
         <div>
           {props.user.twitter_username && (
-            <span className="underline">
-              <a href={`https://twitter.com/${props.user.twitter_username}`}>
+            <span>
+              🐦{' '}
+              <a
+                className="underline"
+                href={`https://twitter.com/${props.user.twitter_username}`}
+              >
                 @{props.user.twitter_username}
               </a>
             </span>
           )}
+        </div>
+        <div>
           {props.user.email && (
-            <span className="underline">
-              <a href={`mailto:${props.user.email}`}>email</a>
+            <span>
+              📮{' '}
+              <a className="underline" href={`mailto:${props.user.email}`}>
+                {props.user.email}
+              </a>
             </span>
           )}
+        </div>
+        <div>
           {props.user.blog && (
-            <span className="underline">
-              <a href={props.user.blog}>blog</a>
+            <span>
+              🖊️{' '}
+              <a className="underline" href={props.user.blog}>
+                {props.user.blog}
+              </a>
             </span>
           )}
         </div>
       </div>
 
-      <div className="flex-1 bg-green-100">
-        {props.user.contributions} contributions to {props.user.repo}
+      <div className="flex-1 p-2">
+        {/* TODO: link to contributions */}
+        {props.user.repo} ({props.user.contributions})
       </div>
     </div>
   )
