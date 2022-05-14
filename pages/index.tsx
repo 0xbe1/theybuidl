@@ -137,11 +137,11 @@ const Home: NextPage<{
         <a className="text-purple-600" href="https://github.com/0xbe1">
           0xbe1
         </a>
-        &nbsp;
+        &nbsp;|&nbsp;
         <a href="https://github.com/0xbe1/theybuild">
           <img src="github.svg" alt="GitHub" className="h-6" />
         </a>
-        &nbsp;|&nbsp;Questions?&nbsp;
+        &nbsp;
         <a href="https://discord.gg/u5KUjNZ8wy">
           <img src="discord.svg" alt="Discord" className="h-6" />
         </a>
