@@ -149,51 +149,77 @@ function Buidler(props: { buidler: AggBuidler }) {
   return (
     <div className="my-2 flex rounded-lg border border-purple-600">
       <div className="w-1/2 p-2">
-        <div>
-          <span>
-            🐙{' '}
-            <a
-              className="underline"
-              href={`https://github.com/${props.buidler.login}`}
-            >
-              {props.buidler.login}
-            </a>
-          </span>
-          {props.buidler.name && <span>&nbsp;{props.buidler.name}</span>}
-        </div>
+        <DataRow
+          icon={'🐙'}
+          data={
+            <>
+              <a
+                className="underline"
+                href={`https://github.com/${props.buidler.login}`}
+              >
+                {props.buidler.login}
+              </a>{' '}
+              {props.buidler.name}
+              {/* TODO: not add whitespace if no name */}
+            </>
+          }
+        />
 
         {/* TODO: render github link when includes @ */}
         {props.buidler.company && (
-          <p className="overflow-hidden truncate">💻 {props.buidler.company}</p>
+          <DataRow
+            icon={'💻'}
+            data={
+              <p className="overflow-hidden truncate">
+                {props.buidler.company}
+              </p>
+            }
+          />
         )}
+
         {props.buidler.twitter_username && (
-          <p className="overflow-hidden truncate">
-            🐦{' '}
-            <a
-              className="underline"
-              href={`https://twitter.com/${props.buidler.twitter_username}`}
-            >
-              {props.buidler.twitter_username}
-            </a>
-          </p>
+          <DataRow
+            icon={'🐦'}
+            data={
+              <a
+                className="underline"
+                href={`https://twitter.com/${props.buidler.twitter_username}`}
+              >
+                {props.buidler.twitter_username}
+              </a>
+            }
+          />
         )}
+
         {props.buidler.email && (
-          <p className="overflow-hidden truncate">
-            📮{' '}
-            <a className="underline" href={`mailto:${props.buidler.email}`}>
-              {props.buidler.email}
-            </a>
-          </p>
+          <DataRow
+            icon={'📮'}
+            data={
+              <p className="overflow-hidden truncate">
+                <a className="underline" href={`mailto:${props.buidler.email}`}>
+                  {props.buidler.email}
+                </a>
+              </p>
+            }
+          />
         )}
+
         {props.buidler.blog && (
-          <p className="overflow-hidden truncate">
-            📝{' '}
-            <a className="underline" href={props.buidler.blog}>
-              {props.buidler.blog}
-            </a>
-          </p>
+          <DataRow
+            icon={'📝'}
+            data={
+              <p className="overflow-hidden truncate">
+                <a className="underline" href={props.buidler.blog}>
+                  {props.buidler.blog}
+                </a>
+              </p>
+            }
+          />
         )}
-        {props.buidler.bio && <p>📝 {props.buidler.bio}</p>}
+
+        {props.buidler.bio && (
+          <DataRow icon={'👋'} data={<p>{props.buidler.bio}</p>} />
+        )}
       </div>
 
       <div className="w-1/2 p-2">
@@ -204,6 +230,15 @@ function Buidler(props: { buidler: AggBuidler }) {
           </div>
         ))}
       </div>
+    </div>
+  )
+}
+
+function DataRow({ icon, data }: { icon: string; data: JSX.Element }) {
+  return (
+    <div className="flex">
+      <div className="w-1/12">{icon}</div>
+      <div className="w-11/12">{data}</div>
     </div>
   )
 }
