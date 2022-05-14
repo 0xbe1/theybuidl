@@ -10,6 +10,7 @@ const BOT_GITHUB_LOGINS = [
   'renovate[bot]',
   'metamaskbot',
   'github-actions[bot]',
+  'eth-bot',
 ]
 
 const MIN_CONTRIBUTIONS = 10
@@ -19,6 +20,7 @@ const GITHUB_REPOS = [
   'bitcoin/bitcoin',
   'ethereum/go-ethereum',
   'ethereum/solidity',
+  'ethereum/EIPs',
   'solana-labs/solana',
   'terra-money/core',
   'near/nearcore',
