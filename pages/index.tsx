@@ -98,6 +98,33 @@ const Home: NextPage<{
     <div className="flex min-h-screen flex-col items-center font-mono">
       <Head>
         <title>They Buidl</title>
+        <meta
+          name="description"
+          content="List of core buidlers behind the most impactful web3 projects."
+        />
+        <meta property="og:url" content="https://theybuidl.xyz/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="They Buidl" />
+        <meta
+          property="og:description"
+          content="List of core buidlers behind the most impactful web3 projects."
+        />
+        <meta
+          property="og:image"
+          content="https://og-image.vercel.app/**They%20Buidl**.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="theybuidl.xyz" />
+        <meta property="twitter:url" content="https://theybuidl.xyz/" />
+        <meta name="twitter:title" content="They Buidl" />
+        <meta
+          name="twitter:description"
+          content="List of core buidlers behind the most impactful web3 projects."
+        />
+        <meta
+          name="twitter:image"
+          content="https://og-image.vercel.app/**They%20Buidl**.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg"
+        />
         <link rel="icon" href="/favicon.ico" />
         <script
           data-token="JKVUMR3WYYPX"
