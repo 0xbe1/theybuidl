@@ -233,7 +233,12 @@ function Buidler(props: { buidler: AggBuidler }) {
         {/* TODO: link to contributions */}
         {props.buidler.repoContributions.map((work, i) => (
           <div key={i}>
-            {work.repo} ({work.contributions})
+            <p>
+              <a className="underline" href={`https://github.com/${work.repo}`}>
+                {work.repo}
+              </a>{' '}
+              ({work.contributions})
+            </p>
           </div>
         ))}
       </div>
