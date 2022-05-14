@@ -199,7 +199,7 @@ const Home: NextPage<{
 function Buidler(props: { buidler: AggBuidler }) {
   return (
     <div className="my-2 flex rounded-lg border border-purple-600">
-      <div className="flex-1 p-2">
+      <div className="w-1/2 p-2">
         <div>
           <span>
             🐙{' '}
@@ -212,46 +212,41 @@ function Buidler(props: { buidler: AggBuidler }) {
           </span>
           {props.buidler.name && <span>&nbsp;{props.buidler.name}</span>}
         </div>
-        <div>
-          {/* TODO: render github link when includes @ */}
-          {props.buidler.company && <span>💻 {props.buidler.company}</span>}
-        </div>
-        <div>
-          {props.buidler.twitter_username && (
-            <span>
-              🐦{' '}
-              <a
-                className="underline"
-                href={`https://twitter.com/${props.buidler.twitter_username}`}
-              >
-                <LongText text={props.buidler.twitter_username} />
-              </a>
-            </span>
-          )}
-        </div>
-        <div>
-          {props.buidler.email && (
-            <span>
-              📮{' '}
-              <a className="underline" href={`mailto:${props.buidler.email}`}>
-                <LongText text={props.buidler.email}/>
-              </a>
-            </span>
-          )}
-        </div>
-        <div>
-          {props.buidler.blog && (
-            <span>
-              📝{' '}
-              <a className="underline" href={props.buidler.blog}>
-                <LongText text={props.buidler.blog} />
-              </a>
-            </span>
-          )}
-        </div>
+
+        {/* TODO: render github link when includes @ */}
+        {props.buidler.company && (
+          <p className="overflow-hidden truncate">💻 {props.buidler.company}</p>
+        )}
+        {props.buidler.twitter_username && (
+          <p className="overflow-hidden truncate">
+            🐦{' '}
+            <a
+              className="underline"
+              href={`https://twitter.com/${props.buidler.twitter_username}`}
+            >
+              {props.buidler.twitter_username}
+            </a>
+          </p>
+        )}
+        {props.buidler.email && (
+          <p className="overflow-hidden truncate">
+            📮{' '}
+            <a className="underline" href={`mailto:${props.buidler.email}`}>
+              {props.buidler.email}
+            </a>
+          </p>
+        )}
+        {props.buidler.blog && (
+          <p className="overflow-hidden truncate">
+            📝{' '}
+            <a className="underline" href={props.buidler.blog}>
+              {props.buidler.blog}
+            </a>
+          </p>
+        )}
       </div>
 
-      <div className="flex-1 p-2">
+      <div className="w-1/2 p-2">
         {/* TODO: link to contributions */}
         {props.buidler.repoContributions.map((work, i) => (
           <div key={i}>
@@ -261,14 +256,6 @@ function Buidler(props: { buidler: AggBuidler }) {
       </div>
     </div>
   )
-}
-
-function LongText({text}: {text: string}) {
-  const maxLen = 32
-  if (text.length <= maxLen) {
-    return <span>{text}</span>
-  }
-  return <span>{text.substring(0, maxLen - 3)}...</span>
 }
 
 export async function getStaticProps() {
