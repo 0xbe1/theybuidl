@@ -173,7 +173,7 @@ const Home: NextPage<{
       <footer className="flex h-16 w-full items-center justify-center border-t">
         By&nbsp;
         <a className="text-purple-600" href="https://github.com/0xbe1">
-          @0xbe1
+          0xbe1
         </a>
         &nbsp;
         <a href="https://github.com/0xbe1/buidler3">
