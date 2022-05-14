@@ -11,6 +11,8 @@ const BOT_GITHUB_LOGINS = [
   'github-actions[bot]',
 ]
 
+const MIN_CONTRIBUTIONS = 10
+
 type Buidler = {
   login: string
   id: number
@@ -311,6 +313,9 @@ export async function getStaticProps() {
 
 function shouldRender(buidler: Buidler): boolean {
   if (BOT_GITHUB_LOGINS.includes(buidler.login)) {
+    return false
+  }
+  if (buidler.contributions < MIN_CONTRIBUTIONS) {
     return false
   }
   return true
