@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import React from 'react'
 import { fetchBuidlers } from './github'
 
 const BOT_GITHUB_LOGINS = [
@@ -169,11 +170,7 @@ function Buidler(props: { buidler: AggBuidler }) {
         {props.buidler.company && (
           <DataRow
             icon={'💻'}
-            data={
-              <p className="overflow-hidden truncate">
-                {props.buidler.company}
-              </p>
-            }
+            data={<LinkifyText text={props.buidler.company} />}
           />
         )}
 
@@ -218,7 +215,10 @@ function Buidler(props: { buidler: AggBuidler }) {
         )}
 
         {props.buidler.bio && (
-          <DataRow icon={'👋'} data={<p>{props.buidler.bio}</p>} />
+          <DataRow
+            icon={'👋'}
+            data={<LinkifyText text={props.buidler.bio} />}
+          />
         )}
       </div>
 
@@ -240,6 +240,31 @@ function DataRow({ icon, data }: { icon: string; data: JSX.Element }) {
       <div className="w-1/12">{icon}</div>
       <div className="w-11/12">{data}</div>
     </div>
+  )
+}
+
+function LinkifyText({ text }: { text: string }) {
+  return (
+    <p>
+      {text
+        .split(' ')
+        .map((word, i) => {
+          if (word.startsWith('@')) {
+            return (
+              <a
+                key={i}
+                className="underline"
+                href={`https://github.com/${word.substring(1)}`}
+              >
+                {word}
+              </a>
+            )
+          } else {
+            return <span>{word}</span>
+          }
+        })
+        .reduce<React.ReactNode>((prev, curr) => [prev, ' ', curr], '')}
+    </p>
   )
 }
 
