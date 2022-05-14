@@ -108,6 +108,22 @@ const Home: NextPage<{
       <main className="flex w-full flex-1 items-center sm:w-4/5 lg:w-1/2">
         <div className="w-full">
           <p className="my-10 text-6xl font-bold text-purple-600">They Buidl</p>
+          <div className="my-5">
+            <p>
+              List of core buidlers behind{' '}
+              <a
+                className="underline"
+                href="https://github.com/0xbe1/theybuild/issues/3"
+              >
+                the most impactful web3 projects
+              </a>
+              .
+            </p>
+          </div>
+          <div className="flex text-purple-500">
+            <div className="w-1/2 px-2">Buidler</div>
+            <div className="w-1/2 px-2">Contributions</div>
+          </div>
           <div>
             {buidlers.map((buidler) => (
               <Buidler key={buidler.id} buidler={buidler} />
@@ -122,7 +138,7 @@ const Home: NextPage<{
           0xbe1
         </a>
         &nbsp;
-        <a href="https://github.com/0xbe1/buidler3">
+        <a href="https://github.com/0xbe1/theybuild">
           <img src="github.svg" alt="GitHub" className="h-6" />
         </a>
         &nbsp;|&nbsp;Questions?&nbsp;
