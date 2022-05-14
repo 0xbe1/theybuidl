@@ -166,14 +166,6 @@ function Buidler(props: { buidler: AggBuidler }) {
           }
         />
 
-        {/* TODO: render github link when includes @ */}
-        {props.buidler.company && (
-          <DataRow
-            icon={'💻'}
-            data={<LinkifyText text={props.buidler.company} />}
-          />
-        )}
-
         {props.buidler.twitter_username && (
           <DataRow
             icon={'🐦'}
@@ -184,6 +176,19 @@ function Buidler(props: { buidler: AggBuidler }) {
               >
                 {props.buidler.twitter_username}
               </a>
+            }
+          />
+        )}
+
+        {props.buidler.blog && (
+          <DataRow
+            icon={'📝'}
+            data={
+              <p className="overflow-hidden truncate">
+                <a className="underline" href={props.buidler.blog}>
+                  {props.buidler.blog}
+                </a>
+              </p>
             }
           />
         )}
@@ -201,16 +206,10 @@ function Buidler(props: { buidler: AggBuidler }) {
           />
         )}
 
-        {props.buidler.blog && (
+        {props.buidler.company && (
           <DataRow
-            icon={'📝'}
-            data={
-              <p className="overflow-hidden truncate">
-                <a className="underline" href={props.buidler.blog}>
-                  {props.buidler.blog}
-                </a>
-              </p>
-            }
+            icon={'💻'}
+            data={<LinkifyText text={props.buidler.company} />}
           />
         )}
 
