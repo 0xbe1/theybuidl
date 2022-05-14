@@ -7,14 +7,31 @@ type Buidler = {
   login: string
   id: number
   url: string
-  repo: string
-  contributions: number
   name: string
   company: string | null
   blog: string | null
   email: string | null
   bio: string | null
   twitter_username: string | null
+  repo: string
+  contributions: number
+}
+
+type AggBuidler = {
+  login: string
+  id: number
+  url: string
+  name: string
+  company: string | null
+  blog: string | null
+  email: string | null
+  bio: string | null
+  twitter_username: string | null
+  // aggregate repo contributions on top of Buidler
+  repoContributions: {
+    repo: string
+    contributions: number
+  }[]
 }
 
 type Result<T> =
@@ -114,7 +131,7 @@ const REPOS = [
 ]
 
 const Home: NextPage<{
-  buidlers: Buidler[]
+  buidlers: AggBuidler[]
 }> = ({ buidlers }) => {
   return (
     <div className="flex min-h-screen flex-col items-center font-mono">
@@ -169,9 +186,9 @@ const Home: NextPage<{
   )
 }
 
-function User(props: { user: Buidler }) {
+function User(props: { user: AggBuidler }) {
   return (
-    <div className="flex rounded-lg border border-purple-600 my-2">
+    <div className="my-2 flex rounded-lg border border-purple-600">
       <div className="flex-1 p-2">
         <div>
           <span>
@@ -187,7 +204,7 @@ function User(props: { user: Buidler }) {
         </div>
         <div>
           {/* TODO: render github link when includes @ */}
-          {props.user.company && <span>💻{' '}{props.user.company}</span>}
+          {props.user.company && <span>💻 {props.user.company}</span>}
         </div>
         <div>
           {props.user.twitter_username && (
@@ -226,7 +243,11 @@ function User(props: { user: Buidler }) {
 
       <div className="flex-1 p-2">
         {/* TODO: link to contributions */}
-        {props.user.repo} ({props.user.contributions})
+        {props.user.repoContributions.map((work, i) => (
+          <div key={i}>
+            {work.repo} ({work.contributions})
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -242,12 +263,52 @@ export async function getStaticProps() {
       users.push(...tryUser.data)
     }
   }
+  users = users.filter(shouldRender)
+
+  const buidlers = users.reduce<AggBuidler[]>((acc, curr) => {
+    const buidler = acc.find((buidler) => buidler.login === curr.login)
+    if (buidler) {
+      buidler.repoContributions.push({
+        repo: curr.repo,
+        contributions: curr.contributions,
+      })
+    } else {
+      acc.push({
+        login: curr.login,
+        id: curr.id,
+        url: curr.url,
+        name: curr.name,
+        company: curr.company,
+        blog: curr.blog,
+        email: curr.email,
+        bio: curr.bio,
+        twitter_username: curr.twitter_username,
+        repoContributions: [
+          {
+            repo: curr.repo,
+            contributions: curr.contributions,
+          },
+        ],
+      })
+    }
+    return acc
+  }, [])
 
   return {
     props: {
-      buidlers: users,
+      buidlers,
     },
   }
+}
+
+function shouldRender(buidler: Buidler): boolean {
+  if (
+    buidler.login === 'dependabot-preview[bot]' ||
+    buidler.login === 'dependabot[bot]'
+  ) {
+    return false
+  }
+  return true
 }
 
 async function fetch(repo: string): Promise<Result<Buidler[]>> {
