@@ -193,6 +193,7 @@ function Buidler(props: { buidler: AggBuidler }) {
             </a>
           </p>
         )}
+        {props.buidler.bio && <p>📝 {props.buidler.bio}</p>}
       </div>
 
       <div className="w-1/2 p-2">
