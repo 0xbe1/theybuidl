@@ -107,15 +107,11 @@ const Home: NextPage<{
 
       <main className="flex w-full flex-1 items-center sm:w-4/5 lg:w-1/2">
         <div className="w-full">
-          <div className="">
-            <p className="my-10 text-6xl font-bold text-purple-600">
-              They Buidl
-            </p>
-            <div>
-              {buidlers.map((buidler) => (
-                <Buidler key={buidler.id} buidler={buidler} />
-              ))}
-            </div>
+          <p className="my-10 text-6xl font-bold text-purple-600">They Buidl</p>
+          <div>
+            {buidlers.map((buidler) => (
+              <Buidler key={buidler.id} buidler={buidler} />
+            ))}
           </div>
         </div>
       </main>
