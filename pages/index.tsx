@@ -263,17 +263,17 @@ function User(props: { user: AggBuidler }) {
 
 export async function getStaticProps() {
   const tryUsers = await Promise.all(REPOS.map((repo) => fetch(repo)))
-  let users: Buidler[] = []
+  let buidlers: Buidler[] = []
   for (const tryUser of tryUsers) {
     if (tryUser.error) {
       continue
     } else {
-      users.push(...tryUser.data)
+      buidlers.push(...tryUser.data)
     }
   }
-  users = users.filter(shouldRender)
+  buidlers = buidlers.filter(shouldRender)
 
-  const buidlers = users.reduce<AggBuidler[]>((acc, curr) => {
+  const aggBuidlers = buidlers.reduce<AggBuidler[]>((acc, curr) => {
     const buidler = acc.find((buidler) => buidler.login === curr.login)
     if (buidler) {
       buidler.repoContributions.push({
@@ -304,7 +304,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      buidlers,
+      buidlers: aggBuidlers,
     },
   }
 }
