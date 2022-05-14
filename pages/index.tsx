@@ -4,7 +4,6 @@ import React from 'react'
 import { Octokit } from '@octokit/core'
 import { throttling } from '@octokit/plugin-throttling'
 
-
 const BOT_GITHUB_LOGINS = [
   'dependabot-preview[bot]',
   'dependabot[bot]',
@@ -100,11 +99,11 @@ const Home: NextPage<{
       <Head>
         <title>They Buidl</title>
         <link rel="icon" href="/favicon.ico" />
-        {/* <script
-          data-token="VLESW6URT5L5"
+        <script
+          data-token="JKVUMR3WYYPX"
           async
           src="https://cdn.splitbee.io/sb.js"
-        ></script> */}
+        ></script>
       </Head>
 
       <main className="flex w-full flex-1 items-center sm:w-4/5 lg:w-1/2">
