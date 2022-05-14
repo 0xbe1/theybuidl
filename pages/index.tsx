@@ -119,7 +119,7 @@ const Home: NextPage<{
   return (
     <div className="flex min-h-screen flex-col items-center font-mono">
       <Head>
-        <title>buidler3</title>
+        <title>They Buidl</title>
         <link rel="icon" href="/favicon.ico" />
         {/* <script
           data-token="VLESW6URT5L5"
@@ -132,7 +132,7 @@ const Home: NextPage<{
         <div className="w-full">
           <div className=" text-center">
             <p className="bg-gradient-to-tr from-purple-600 to-blue-600 bg-clip-text text-6xl font-bold text-transparent">
-              buidler3
+              They Buidl
             </p>
             <div>
               {buidlers.map((buidler) => (
