@@ -365,6 +365,7 @@ export async function getStaticProps() {
     props: {
       buidlers: aggBuidlers,
     },
+    revalidate: 60 * 60, // ISR (incremental static regeneration) per hour
   }
 }
 
