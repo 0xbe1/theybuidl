@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import React from 'react'
+import React, { useState } from 'react'
 import { Octokit } from '@octokit/core'
 import { throttling } from '@octokit/plugin-throttling'
 
@@ -14,6 +14,7 @@ const BOT_GITHUB_LOGINS = [
 ]
 
 const MIN_CONTRIBUTIONS = 10
+const LOAD_NUM = 20
 
 const GITHUB_REPOS = [
   // chains
@@ -96,6 +97,8 @@ type AggBuidler = {
 const Home: NextPage<{
   buidlers: AggBuidler[]
 }> = ({ buidlers }) => {
+  const [num, setNum] = useState(LOAD_NUM)
+
   return (
     <div className="flex min-h-screen flex-col items-center font-mono">
       <Head>
@@ -155,9 +158,21 @@ const Home: NextPage<{
             <div className="w-1/2 px-2">Contributions</div>
           </div>
           <div>
-            {buidlers.map((buidler) => (
+            {buidlers.slice(0, num).map((buidler) => (
               <Buidler key={buidler.id} buidler={buidler} />
             ))}
+          </div>
+          <div className="flex justify-center pb-4">
+            {num < buidlers.length ? (
+              <button
+                className="hover:underline"
+                onClick={() => setNum((prevNum) => prevNum + LOAD_NUM)}
+              >
+                Load More 👇
+              </button>
+            ) : (
+              'The end!'
+            )}
           </div>
         </div>
       </main>
