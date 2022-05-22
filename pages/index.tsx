@@ -3,6 +3,7 @@ import Head from 'next/head'
 import React, { useState } from 'react'
 import { Octokit } from '@octokit/core'
 import { throttling } from '@octokit/plugin-throttling'
+import GITHUB_REPOS from '../repos.json'
 
 const BOT_GITHUB_LOGINS = [
   'dependabot-preview[bot]',
@@ -15,43 +16,6 @@ const BOT_GITHUB_LOGINS = [
 
 const MIN_CONTRIBUTIONS = 10
 const LOAD_NUM = 20
-
-const GITHUB_REPOS = [
-  // chains
-  'bitcoin/bitcoin',
-  'ethereum/go-ethereum',
-  'ethereum/solidity',
-  'ethereum/EIPs',
-  'solana-labs/solana',
-  'terra-money/core',
-  'near/nearcore',
-  'paritytech/substrate',
-  'paritytech/polkadot',
-  'ava-labs/avalanchego',
-  'cosmos/cosmos-sdk',
-  // defi
-  'smartcontractkit/chainlink',
-  'Uniswap/v2-core',
-  'Uniswap/v3-core',
-  'aave/protocol-v2',
-  'aave/aave-v3-core',
-  'curvefi/curve-contract',
-  'OlympusDAO/olympus-contracts',
-  // devtools
-  'NomicFoundation/hardhat',
-  'foundry-rs/foundry',
-  'ChainSafe/web3.js',
-  'ethers-io/ethers.js',
-  'OpenZeppelin/openzeppelin-contracts',
-  // wallet
-  'MetaMask/metamask-extension',
-  // infra
-  'graphprotocol/graph-node',
-  'streamingfast/substreams',
-  'ceramicnetwork/ceramic',
-  'ArweaveTeam/arweave',
-  'ipfs/go-ipfs',
-]
 
 type Result<T> =
   | {
