@@ -160,8 +160,12 @@ const Home: NextPage<{
             miniscan.xyz
           </a>{' '}
           |{' '}
-          <a className="underline text-purple-600" href="https://theybuidl.xyz">
+          <a className="text-purple-600 underline" href="https://theybuidl.xyz">
             theybuidl.xyz
+          </a>{' '}
+          |{' '}
+          <a className="underline" href="https://okgraph.xyz">
+            okgraph.xyz
           </a>{' '}
           |{' '}
           <a className="underline" href="https://name3.org">
