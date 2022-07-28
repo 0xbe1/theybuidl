@@ -27,5 +27,6 @@
   "streamingfast/substreams",
   "ceramicnetwork/ceramic",
   "ArweaveTeam/arweave",
-  "ipfs/go-ipfs"
+  "ipfs/go-ipfs",
+  "move-language/move"
 ]
